@@ -1,12 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Skeleton } from "antd";
-import {
-  Heart,
-  Eye,
-  ArrowLeft,
-  ArrowRight,
-  ShoppingCart,
-  LogIn } from "lucide-react";
+import { Heart, Eye, ArrowLeft, ArrowRight, ShoppingCart, LogIn } from "lucide-react";
 import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../slice/CartSlice";
@@ -14,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import { fetchProducts } from "../../slice/ProductSlice";
 import { fetchWishlist, toggleWishlistItem } from "../../slice/WishlistSlice";
 import Modal from "../../components/Modal/Modal"; 
-
 const FlashSale = () => {
   const { items: products } = useSelector((state) => state.products);
   const { items: wishlistItems } = useSelector((state) => state.wishlist);
@@ -200,7 +193,7 @@ const FlashSale = () => {
   return (
     <div className="w-full">
       <div className="max-w-7xl mx-auto">
-        <div className="bg-red-500 text-white px-4 py-2 rounded-t-lg inline-block mb-4">
+        <div className="primaryColor text-white px-4 py-2 rounded-t-lg inline-block mb-4">
           Todays
         </div>
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 space-y-4 sm:space-y-0">
@@ -270,7 +263,7 @@ const FlashSale = () => {
                         alt={product.name}
                         className="w-full h-40 sm:h-60 object-contain rounded"
                       />
-                      <span className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded text-xs sm:text-sm">
+                      <span className="absolute top-2 left-2 primaryColor text-white px-2 py-1 rounded text-xs sm:text-sm">
                         {product.discount}
                       </span>
                       <button
@@ -316,7 +309,7 @@ const FlashSale = () => {
                       </span>
                     </div>
                     <button
-                      className="w-full bg-black text-white py-2 rounded-md flex items-center justify-center hover:bg-gray-800 transition-colors"
+                      className="w-full secondaryColor text-white py-2 rounded-md flex items-center justify-center  transition-colors"
                       onClick={() => handleAddToCart(product)}
                     >
                       <ShoppingCart className="w-4 h-4 mr-2" />
@@ -368,7 +361,7 @@ const FlashSale = () => {
             </button>
             <button
               onClick={handleLoginRedirect}
-              className="px-4 py-2 bg-red-500 text-white rounded-md flex items-center justify-center hover:bg-red-600 transition-colors"
+              className="px-4 py-2 primaryColor text-white rounded-md flex items-center justify-center  transition-colors"
             >
               <LogIn className="mr-2" size={20} />
               Go to Login

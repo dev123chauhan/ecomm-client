@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { AlertCircle, Package } from "lucide-react";
 import { Link } from 'react-router-dom';
-
 const Order = () => {
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState();
@@ -95,7 +94,7 @@ const Order = () => {
     return (
       <div className="min-h-screen dark:bg-gray-900 dark:text-white flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-8 w-8 border-4 border-solid border-red-500 border-r-transparent mb-4"></div>
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-4 border-solid border-[#db4444] border-r-transparent mb-4"></div>
           <p>Loading your orders...</p>
         </div>
       </div>
@@ -106,12 +105,12 @@ const Order = () => {
     return (
       <div className="min-h-screen dark:bg-gray-900 dark:text-white flex items-center justify-center">
         <div className="text-center max-w-md mx-auto p-6 bg-red-50 dark:bg-red-900/20 rounded-lg">
-          <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
+          <AlertCircle className="h-12 w-12 text-[#db4444] mx-auto mb-4" />
           <h2 className="text-xl font-bold mb-2">Error Loading Orders</h2>
           <p>{error}</p>
           <button 
             onClick={() => window.location.reload()} 
-            className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
+            className="mt-4 px-4 py-2 primaryColor text-white rounded  transition"
           >
             Try Again
           </button>
@@ -134,7 +133,7 @@ const Order = () => {
         <div className="py-4 sm:py-8 max-w-7xl mx-auto px-4">
           <button 
             onClick={handleBackToList}
-            className="mb-6 flex items-center text-red-500 hover:text-red-600"
+            className="mb-6 flex items-center text-[#db4444]"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -252,7 +251,7 @@ const Order = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 mt-6">
-            <button className="w-full sm:flex-1 bg-red-500 text-white py-3 sm:py-2 px-4 rounded hover:bg-red-600 transition duration-200">
+            <button className="w-full sm:flex-1 primaryColor text-white py-3 sm:py-2 px-4 rounded  transition duration-200">
               Track Order
             </button>
             <button className="w-full sm:flex-1 border border-gray-300 dark:border-gray-700 py-3 sm:py-2 px-4 rounded hover:bg-gray-50 dark:hover:bg-gray-800 transition duration-200">
@@ -279,7 +278,7 @@ const Order = () => {
               </p>
               <Link 
                 to="/shop" 
-                className="bg-red-500 text-white px-6 py-3 rounded-lg hover:bg-red-600 transition duration-200 font-semibold"
+                className="primaryColor text-white px-6 py-3 rounded-lg  transition duration-200 font-semibold"
               >
                 Start Shopping
               </Link>
@@ -334,7 +333,7 @@ const Order = () => {
                 
                 <div className="flex flex-col items-end justify-between">
                   <div className="text-lg font-bold">{currency}{safeToFixed(calculateOrderTotal(order.items, order.shipping))}</div>
-                  <button className="text-sm text-red-500 hover:text-red-600 underline">
+                  <button className="text-sm text-[#db4444] underline">
                     View Details
                   </button>
                 </div>
