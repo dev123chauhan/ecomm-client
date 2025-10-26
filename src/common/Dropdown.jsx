@@ -15,7 +15,7 @@ import logoutIcon from "../../public/assets/Logout.png";
 import { logoutUser } from "../redux/action/authAction";
 import { fetchCart } from "../redux/slice/cartSlice";
 import { useCart } from "../context/CartContext";
-import { ThemeContext } from "../context/ThemeContextProvider";
+import { ThemeContext } from "../context/ThemeContext";
 const Dropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();

@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useCallback } from "react";
 const ModalContext = createContext();
-export const ModalContextProvider = ({ children }) => {
+export const ModalProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
 

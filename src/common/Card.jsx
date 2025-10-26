@@ -7,7 +7,7 @@ import wishlistIconWhite from "../../public/assets/wishlistWhite.png";
 import wishlistIconFilled from "../../public/assets/heartfill.png";
 import wishlistIconFilledWhite from "../../public/assets/Wishlist.png";
 import Button from "./Button";
-import { ThemeContext } from "../context/ThemeContextProvider";
+import { ThemeContext } from "../context/ThemeContext";
 const Card = ({
   product,
   loading = false,
