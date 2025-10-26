@@ -8,7 +8,7 @@ import {
   validateEmail,
   validatePassword,
   validateUsername,
-} from "../../Validation/validation";
+} from "../../validation/validation";
 import { useModal } from "../../context/ModalContext";
 import Button from "../../common/Button";
 import { Loader } from "../../common/Loader";

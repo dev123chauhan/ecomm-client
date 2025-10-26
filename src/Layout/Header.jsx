@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Menu, Moon, Sun, X } from "lucide-react";
-import { ThemeContext } from "../context/ThemeContextProvider";
+import { ThemeContext } from "../context/themeContextProvider";
 import { useModal } from "../context/ModalContext";
 import { navLinkItems } from "../lib/navLinkItems";
 import Button from "../common/Button";

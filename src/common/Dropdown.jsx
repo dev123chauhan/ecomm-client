@@ -2,7 +2,6 @@ import { useState, useEffect, useRef, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
-import { ThemeContext } from "../context/ThemeContextProvider";
 import wishlistIcon from "../../public/assets/Wishlist.png";
 import wishlistIconWhite from "../../public/assets/wishlistWhite.png";
 import cartIcon from "../../public/assets/Cart.png";
@@ -16,6 +15,7 @@ import logoutIcon from "../../public/assets/Logout.png";
 import { logoutUser } from "../redux/action/authAction";
 import { fetchCart } from "../redux/slice/cartSlice";
 import { useCart } from "../context/cartContext";
+import { ThemeContext } from "../context/themeContextProvider";
 const Dropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
