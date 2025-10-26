@@ -1,282 +1,225 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { registerUser } from "../../action/AuthAction";
 import { toast } from "sonner";
-import { Loader } from "../../utils/Loader";
-import { ArrowLeft, CheckCircle, AlertCircle } from "lucide-react";
-import AuthImage from "../AuthImage/AuthImage";
-
+import { CheckCircle, AlertCircle, Eye, EyeOff } from "lucide-react";
+import { useFormik } from "formik";
+// import { registerUser } from "../redux/action/authAction";
+import {
+  validateEmail,
+  validatePassword,
+  validateUsername,
+} from "../../Validation/validation";
+import { useModal } from "../../context/ModalContext";
+import Button from "../../common/Button";
+import { Loader } from "../../common/Loader";
+import { registerUser } from "../../redux/action/authAction";
 const Register = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const { loading } = useSelector((state) => state.auth);
+  const { closeModal, openModal } = useModal();
+  
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      email: "",
+      password: "",
+    },
+    validate: (values) => {
+      const errors = {};
 
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
+      const usernameValidation = validateUsername(values.username);
+      if (!usernameValidation.isValid) {
+        errors.username = usernameValidation.message;
+      }
+
+      const emailValidation = validateEmail(values.email);
+      if (!emailValidation.isValid) {
+        errors.email = emailValidation.message;
+      }
+
+      const passwordValidation = validatePassword(values.password);
+      if (!passwordValidation.isValid) {
+        errors.password = passwordValidation.message;
+      }
+
+      return errors;
+    },
+    onSubmit: async (values) => {
+      try {
+        await dispatch(registerUser(values));
+        toast.success("Successfully registered");
+        closeModal();
+      } catch (error) {
+        toast.error("Registration failed");
+        console.error("Error registering user:", error);
+      }
+    },
   });
 
-  const [errors, setErrors] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
-  const [validity, setValidity] = useState({
-    username: false,
-    email: false,
-    password: false,
-  });
-
-  const validateUsername = (username) => {
-    if (!username) return { isValid: false, message: "Name is required" };
-    if (username.length < 2)
-      return {
-        isValid: false,
-        message: "Name must be at least 2 characters long",
-      };
-    if (username.length > 50)
-      return { isValid: false, message: "Name cannot exceed 50 characters" };
-    return { isValid: true, message: "" };
+  const switchToLogin = () => {
+    openModal("Login");
   };
 
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email) return { isValid: false, message: "Email is required" };
-    if (!emailRegex.test(email))
-      return { isValid: false, message: "Please enter a valid email address" };
-    return { isValid: true, message: "" };
+  const isFieldValid = (fieldName) => {
+    return (
+      formik.touched[fieldName] &&
+      !formik.errors[fieldName] &&
+      formik.values[fieldName]
+    );
   };
 
-  const validatePassword = (password) => {
-    if (!password) return { isValid: false, message: "Password is required" };
-    if (password.length < 8)
-      return {
-        isValid: false,
-        message: "Password must be at least 8 characters long",
-      };
-
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasLowerCase = /[a-z]/.test(password);
-    const hasNumber = /[0-9]/.test(password);
-    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-
-    if (!(hasUpperCase && hasLowerCase && hasNumber && hasSpecialChar)) {
-      return {
-        isValid: false,
-        message:
-          "Password must include uppercase, lowercase, number, and special character",
-      };
-    }
-
-    return { isValid: true, message: "" };
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-
-    let validationResult;
-    switch (name) {
-      case "username":
-        validationResult = validateUsername(value);
-        break;
-      case "email":
-        validationResult = validateEmail(value);
-        break;
-      case "password":
-        validationResult = validatePassword(value);
-        break;
-      default:
-        validationResult = { isValid: false, message: "" };
-    }
-
-    setErrors((prev) => ({
-      ...prev,
-      [name]: validationResult.message,
-    }));
-
-    setValidity((prev) => ({
-      ...prev,
-      [name]: validationResult.isValid,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const usernameValidation = validateUsername(formData.username);
-    const emailValidation = validateEmail(formData.email);
-    const passwordValidation = validatePassword(formData.password);
-
-    setErrors({
-      username: usernameValidation.message,
-      email: emailValidation.message,
-      password: passwordValidation.message,
-    });
-
-    setValidity({
-      username: usernameValidation.isValid,
-      email: emailValidation.isValid,
-      password: passwordValidation.isValid,
-    });
-
-    if (
-      !usernameValidation.isValid ||
-      !emailValidation.isValid ||
-      !passwordValidation.isValid
-    ) {
-      return;
-    }
-
-    try {
-      await dispatch(registerUser(formData));
-      toast.success("Successfully registered");
-      setTimeout(() => {
-        navigate("/");
-      }, 1200);
-    } catch (error) {
-      toast.error("Registration failed");
-      console.error("Error registering user:", error);
-    }
-  };
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+  const isFieldInvalid = (fieldName) => {
+    return formik.touched[fieldName] && formik.errors[fieldName];
   };
 
   return (
-    <div className="flex flex-col md:flex-row  bg-blue-50">
-      <AuthImage />
+    <div className="p-6 dark:bg-gray-800">
+      <p className="mb-6 text-gray-600 dark:text-gray-300 text-center">
+        Enter your Credentials details below
+      </p>
 
-      <div className="w-full md:w-1/2 flex items-center justify-center p-8 h-screen">
-        <div className="w-full max-w-md">
-          <Link className="flex items-center gap-2 py-3 text-[#db4444]" to="/">
-            <ArrowLeft />
-            Back to home
-          </Link>
-          <h2 className="text-2xl font-bold mb-6">Create an account</h2>
-          <p className="mb-6 text-gray-600">Enter your details below</p>
-
-          <form onSubmit={handleSubmit}>
-            <div className="mb-4 relative">
-              <input
-                type="text"
-                name="username"
-                placeholder="Name"
-                className={`w-full px-3 py-2 border rounded-md ${
-                  formData.username
-                    ? validity.username
-                      ? "border-green-500 bg-green-50"
-                      : "border-[#db4444] bg-red-50"
-                    : "border-gray-300"
-                }`}
-                onChange={handleChange}
-                required
-              />
-              {formData.username && (
-                <div className="absolute right-3 top-1/3 transform -translate-y-1/2">
-                  {validity.username ? (
-                    <CheckCircle className="text-green-500 h-5 w-5" />
-                  ) : (
-                    <AlertCircle className="text-[#db4444] h-5 w-5" />
-                  )}
-                </div>
-              )}
-              {errors.username && (
-                <div className="text-[#db4444] text-sm mt-1 flex items-center gap-1">
-                  <AlertCircle className="h-4 w-4" />
-                  {errors.username}
-                </div>
-              )}
+      <form onSubmit={formik.handleSubmit}>
+        <div className="mb-2">
+          <div className="relative">
+            <input
+              type="text"
+              name="username"
+              placeholder="Name"
+              value={formik.values.username}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              className={`w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:text-white ${
+                formik.values.username
+                  ? isFieldValid("username")
+                    ? "border-green-500 bg-green-50 dark:bg-green-900/20"
+                    : "border-[#db4444] bg-red-50 dark:bg-red-900/20"
+                  : "border-gray-300 dark:border-gray-600"
+              }`}
+            />
+            {formik.values.username && (
+              <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                {isFieldValid("username") ? (
+                  <CheckCircle className="text-green-500 h-5 w-5" />
+                ) : (
+                  <AlertCircle className="text-[#db4444] h-5 w-5" />
+                )}
+              </div>
+            )}
+          </div>
+          {isFieldInvalid("username") && (
+            <div className="text-[#db4444] text-sm mt-1 flex items-center gap-1">
+              <AlertCircle className="h-4 w-4" />
+              {formik.errors.username}
             </div>
-            <div className="mb-4 relative">
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                className={`w-full px-3 py-2 border rounded-md ${
-                  formData.email
-                    ? validity.email
-                      ? "border-green-500 bg-green-50"
-                      : "border-[#db4444] bg-red-50"
-                    : "border-gray-300"
-                }`}
-                onChange={handleChange}
-                required
-              />
-              {formData.email && (
-                <div className="absolute right-3 top-1/3 transform -translate-y-1/2">
-                  {validity.email ? (
-                    <CheckCircle className="text-green-500 h-5 w-5" />
-                  ) : (
-                    <AlertCircle className="text-[#db4444] h-5 w-5" />
-                  )}
-                </div>
-              )}
-              {errors.email && (
-                <div className="text-[#db4444] text-sm mt-1 flex items-center gap-1">
-                  <AlertCircle className="h-4 w-4" />
-                  {errors.email}
-                </div>
-              )}
-            </div>
-            <div className="relative mb-6">
-              <input
-                type={showPassword ? "text" : "password"}
-                name="password"
-                placeholder="Password"
-                className={`w-full px-3 py-2 border rounded-md ${
-                  formData.password
-                    ? validity.password
-                      ? "border-green-500 bg-green-50"
-                      : "border-[#db4444] bg-red-50"
-                    : "border-gray-300"
-                }`}
-                onChange={handleChange}
-                required
-              />
-              <button
-                type="button"
-                onClick={togglePasswordVisibility}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 focus:outline-none"
-              ></button>
-              {formData.password && (
-                <div className="absolute right-3 top-1/3 transform -translate-y-1/2">
-                  {validity.password ? (
-                    <CheckCircle className="text-green-500 h-5 w-5" />
-                  ) : (
-                    <AlertCircle className="text-[#db4444] h-5 w-5" />
-                  )}
-                </div>
-              )}
-              {errors.password && (
-                <div className="text-[#db4444] text-sm mt-1 flex items-center gap-1">
-                  <AlertCircle className="h-4 w-4" />
-                  {errors.password}
-                </div>
-              )}
-            </div>
-            <button
-              type="submit"
-              className="w-full primaryColor text-white py-2 rounded-md transition duration-300"
-              disabled={loading}
-            >
-              {loading ? <Loader /> : "Create Account"}
-            </button>
-          </form>
-
-          <p className="mt-6 text-center text-gray-600">
-            Already have an account?{" "}
-            <Link to="/login" className="text-[#db4444] hover:underline">
-              Log in
-            </Link>
-          </p>
+          )}
         </div>
-      </div>
+        <div className="mb-4"></div>
+
+        <div className="mb-2">
+          <div className="relative">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              className={`w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:text-white ${
+                formik.values.email
+                  ? isFieldValid("email")
+                    ? "border-green-500 bg-green-50 dark:bg-green-900/20"
+                    : "border-[#db4444] bg-red-50 dark:bg-red-900/20"
+                  : "border-gray-300 dark:border-gray-600"
+              }`}
+            />
+            {formik.values.email && (
+              <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                {isFieldValid("email") ? (
+                  <CheckCircle className="text-green-500 h-5 w-5" />
+                ) : (
+                  <AlertCircle className="text-[#db4444] h-5 w-5" />
+                )}
+              </div>
+            )}
+          </div>
+          {isFieldInvalid("email") && (
+            <div className="text-[#db4444] text-sm mt-1 flex items-center gap-1">
+              <AlertCircle className="h-4 w-4" />
+              {formik.errors.email}
+            </div>
+          )}
+        </div>
+        <div className="mb-4"></div>
+
+        <div className="relative mb-2">
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              placeholder="Password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              className={`w-full px-3 py-2 ${formik.values.password ? 'pr-24' : 'pr-12'} border rounded-md dark:bg-gray-700 dark:text-white ${
+                formik.values.password
+                  ? isFieldValid("password")
+                    ? "border-green-500 bg-green-50 dark:bg-green-900/20"
+                    : "border-[#db4444] bg-red-50 dark:bg-red-900/20"
+                  : "border-gray-300 dark:border-gray-600"
+              }`}
+            />
+            {formik.values.password && (
+              <div className="absolute right-12 top-1/2 transform -translate-y-1/2">
+                {isFieldValid("password") ? (
+                  <CheckCircle className="text-green-500 h-5 w-5" />
+                ) : (
+                  <AlertCircle className="text-[#db4444] h-5 w-5" />
+                )}
+              </div>
+            )}
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 focus:outline-none text-black hover:text-gray-700 dark:text-white dark:hover:text-gray-200"
+            >
+              {showPassword ? (
+                <Eye  className="h-5 w-5" />
+              ) : (
+                <EyeOff  className="h-5 w-5" />
+              )}
+            </button>
+          </div>
+          {isFieldInvalid("password") && (
+            <div className="text-[#db4444] text-sm mt-1 flex items-center gap-1">
+              <AlertCircle className="h-4 w-4" />
+              {formik.errors.password}
+            </div>
+          )}
+        </div>
+        <div className="mb-6"></div>
+        
+        <Button
+          type="submit"
+          text=""
+          className="w-full primaryColor py-3 text-white"
+          disabled={loading}
+        >
+          {loading ? <Loader /> : "Create Account"}
+        </Button>
+      </form>
+
+      <p className="mt-6 text-center text-gray-600 dark:text-gray-300">
+        Already have an account?{" "}
+        <button
+          onClick={switchToLogin}
+          className="text-[#db4444] hover:underline font-medium"
+        >
+          Log in
+        </button>
+      </p>
     </div>
   );
 };
