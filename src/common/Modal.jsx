@@ -3,7 +3,7 @@ import { Dialog } from "primereact/dialog";
 import { useModal } from "../context/ModalContext";
 import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
-import { ThemeContext } from "../context/themeContextProvider";
+import { ThemeContext } from "../context/ThemeContextProvider";
 const Modal = () => {
   const { isOpen, modalTitle, closeModal } = useModal();
   const { theme } = useContext(ThemeContext);
