@@ -1,9 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-body, html {
+ html, body {
   margin: 0 !important;
   padding: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow-x: hidden !important;
 }
 footer {
   margin-bottom: 0 !important;
