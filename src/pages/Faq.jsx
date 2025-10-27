@@ -1,5 +1,4 @@
 import { useState } from "react";
-import PropTypes from "prop-types";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { Link } from "react-router-dom";
 const FAQItem = ({ question, answer }) => {
@@ -26,10 +25,7 @@ const FAQItem = ({ question, answer }) => {
   );
 };
 
-FAQItem.propTypes = {
-  question: PropTypes.string.isRequired,
-  answer: PropTypes.string.isRequired,
-};
+
 
 const FAQSection = ({ title, items }) => (
   <div className="shadow-md rounded-lg  mb-6">
@@ -39,16 +35,6 @@ const FAQSection = ({ title, items }) => (
     ))}
   </div>
 );
-
-FAQSection.propTypes = {
-  title: PropTypes.string.isRequired,
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      question: PropTypes.string.isRequired,
-      answer: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-};
 
 const Faq = () => {
   const faqData = [

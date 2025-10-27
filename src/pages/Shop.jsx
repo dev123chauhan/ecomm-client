@@ -45,9 +45,6 @@ export default function Shop() {
   }, [user, dispatch]);
 
   const isLoading = productsLoading || categoriesLoading || artificialLoading || isFiltering;
-
-  // const isInWishlist = (productId) =>
-  //   wishlistItems?.some((item) => item.productId._id === productId);
  const isInWishlist = (productId) => {
   return wishlistItems.some(
     (item) => item?.productId?._id === productId

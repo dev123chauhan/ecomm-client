@@ -32,12 +32,6 @@ const ProductDetail = () => {
   if (!product) return null;
 
   const productId = product._id || product.id;
-  // const colors = ["white", "#db4444"];
-
-  // const safeRating =
-  //   typeof product.rating === "number" && isFinite(product.rating)
-  //     ? Math.min(Math.max(0, Math.floor(product.rating)), 5)
-  //     : 0;
 
   const handleCheckout = () => {
     if (!isAuthenticated) return openModal("Login");
@@ -140,23 +134,6 @@ const ProductDetail = () => {
                 </p>
               )}
             </div>
-            {/* <div className="mb-6">
-              <h3 className="font-semibold mb-2">Colours:</h3>
-              <div className="flex space-x-2">
-                {colors.map((color) => (
-                  <button
-                    key={color}
-                    className={`w-8 h-8 rounded-full border-2 transition-all ${
-                      selectedColor === color
-                        ? "border-black scale-110"
-                        : "border-gray-300 hover:scale-105"
-                    }`}
-                    style={{ backgroundColor: color }}
-                    onClick={() => setSelectedColor(color)}
-                  />
-                ))}
-              </div>
-            </div> */}
             <div className="flex items-center space-x-4 mb-6">
               <div className="flex items-center border border-gray-300 rounded-md">
                 <button
