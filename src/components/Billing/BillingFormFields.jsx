@@ -7,12 +7,14 @@ export default function BillingFormFields({ formik, onChange, onSubmit }) {
       formik.values[fieldName]
     );
   };
+
   const isFieldInvalid = (fieldName) => {
     return formik.touched[fieldName] && formik.errors[fieldName];
   };
 
   return (
     <form onSubmit={onSubmit} className="space-y-4 sm:space-y-5 mb-5">
+      {/* First Name */}
       <div>
         <label
           htmlFor="firstName"
@@ -54,6 +56,7 @@ export default function BillingFormFields({ formik, onChange, onSubmit }) {
         )}
       </div>
 
+      {/* Street Address */}
       <div>
         <label
           htmlFor="streetAddress"
@@ -95,6 +98,7 @@ export default function BillingFormFields({ formik, onChange, onSubmit }) {
         )}
       </div>
 
+      {/* Apartment (Optional) */}
       <div>
         <label
           htmlFor="apartment"
@@ -112,7 +116,9 @@ export default function BillingFormFields({ formik, onChange, onSubmit }) {
         />
       </div>
 
+      {/* Town/City and Phone Number */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {/* Town/City */}
         <div>
           <label
             htmlFor="townCity"
@@ -154,6 +160,7 @@ export default function BillingFormFields({ formik, onChange, onSubmit }) {
           )}
         </div>
 
+        {/* Phone Number */}
         <div>
           <label
             htmlFor="phoneNumber"
@@ -207,6 +214,7 @@ export default function BillingFormFields({ formik, onChange, onSubmit }) {
         </div>
       </div>
 
+      {/* Email Address */}
       <div>
         <label
           htmlFor="emailAddress"

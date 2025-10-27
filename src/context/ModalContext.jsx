@@ -6,7 +6,7 @@ export const ModalProvider = ({ children }) => {
 
   const openModal = useCallback((title) => {
     setModalTitle(title);
-    setIsOpen(true);
+    setIsOpen(true);  
   }, []);
 
   const closeModal = useCallback(() => {

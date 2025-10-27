@@ -12,6 +12,7 @@ import cameraIconDark from "../../public/assets/camera.png";
 import headphoneIconDark from "../../public/assets/headphone.png";
 import gamepadIconDark from "../../public/assets/gamepad.png";
 
+
 import phoneIconActive from "../../public/assets/cellPhone.png";
 import computerIconActive from "../../public/assets/computer.png";
 import smartwatchIconActive from "../../public/assets/smartWatch.png";

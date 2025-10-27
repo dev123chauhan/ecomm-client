@@ -2,8 +2,8 @@ import { useEffect, useRef, useContext } from "react";
 import { Dialog } from "primereact/dialog";
 import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
-import { useModal } from "../context/ModalContext";
 import { ThemeContext } from "../context/ThemeContext";
+import { useModal } from "../context/ModalContext";
 const Modal = () => {
   const { isOpen, modalTitle, closeModal } = useModal();
   const { theme } = useContext(ThemeContext);

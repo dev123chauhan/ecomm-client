@@ -7,12 +7,9 @@ import { validateEmail, validateMessage, validateName } from "../validation/vali
 import ContactMap from "../components/Contact/ContactMap";
 import ContactInfo from "../components/Contact/ContactInfo";
 import ContactForm from "../components/Contact/ContactForm";
-
 const Contact = () => {
   const baseUrl = import.meta.env.VITE_API_URL;
   const [loading, setLoading] = useState(false);
-
-  // Formik setup 🎯
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -83,3 +80,4 @@ const Contact = () => {
 };
 
 export default Contact;
+

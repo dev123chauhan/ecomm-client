@@ -71,6 +71,8 @@ export default function FlashSale() {
     const slug = product.name.toLowerCase().replace(/[^\w\s-]/g, "").replace(/\s+/g, "-").trim();
     navigate(`/product/${slug}`, { state: { product } });
   };
+
+  // const isInWishlist = (id) => wishlistItems.some((item) => item.productId._id === id);
   const isInWishlist = (productId) => {
   return wishlistItems.some(
     (item) => item?.productId?._id === productId

@@ -99,7 +99,7 @@ const Card = ({
     return null;
   };
 
-  // Get the appropriate wishlist icon based on theme and wishlist status
+
   const getWishlistIcon = () => {
     if (isInWishlist) {
       return isDarkMode ? wishlistIconFilledWhite : wishlistIconFilled;

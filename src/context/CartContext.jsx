@@ -3,7 +3,6 @@ import Cart from "../components/Cart/Cart";
 const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [visible, setVisible] = useState(false);
-
   const openDrawer = () => setVisible(true);
   const closeDrawer = () => setVisible(false);
 

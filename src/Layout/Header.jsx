@@ -5,8 +5,8 @@ import { Menu, Moon, Sun, X } from "lucide-react";
 import { navLinkItems } from "../lib/navLinkItems";
 import Button from "../common/Button";
 import Dropdown from "../common/Dropdown";
-import { useModal } from "../context/ModalContext";
 import { ThemeContext } from "../context/ThemeContext";
+import { useModal } from "../context/ModalContext";
 const Header = () => {
   const location = useLocation();
   const { isAuthenticated } = useSelector((state) => state.auth);

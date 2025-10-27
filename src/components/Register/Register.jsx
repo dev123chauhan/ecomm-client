@@ -7,11 +7,11 @@ import {
   validateEmail,
   validatePassword,
   validateUsername,
-} from "../../validation/validation";
+} from "../../Validation/validation";
+import { useModal } from "../../context/ModalContext";
 import Button from "../../common/Button";
 import { Loader } from "../../common/Loader";
 import { registerUser } from "../../redux/action/authAction";
-import { useModal } from "../../context/ModalContext";
 const Register = () => {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);

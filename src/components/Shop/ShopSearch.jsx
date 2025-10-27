@@ -1,4 +1,5 @@
 import CategoryFilter from "./CategoryFilter";
+
 export default function ShopSearch({ categories, handlers, loading }) {
   return (
     <div className="rounded-xl shadow-sm py-6 sticky top-8">
@@ -11,8 +12,6 @@ export default function ShopSearch({ categories, handlers, loading }) {
           onChange={handlers.handleSearchChange}
         />
       </div>
-
-
       <h2 className="text-xl font-semibold mb-4">Categories</h2>
       <CategoryFilter categories={categories} handlers={handlers} loading={loading} />
     </div>
