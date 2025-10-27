@@ -7,9 +7,9 @@ import { store } from "./redux/store/store.js";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import Modal from "./common/Modal.jsx";
-import ThemeProvider from "./context/ThemeContext.jsx";
-import { ModalProvider } from "./context/ModalContext.jsx";
 import { CartProvider } from "./context/CartContext.jsx";
+import { ModalProvider } from "./context/ModalContext.jsx";
+import ThemeProvider from "./context/ThemeContext.jsx";
 createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <Provider store={store}>

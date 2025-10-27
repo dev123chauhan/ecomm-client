@@ -13,7 +13,7 @@ export const ModalProvider = ({ children }) => {
     setIsOpen(false);
     setModalTitle("");
   }, []);
-
+ 
   return (
     <ModalContext.Provider value={{ isOpen, modalTitle, openModal, closeModal }}>
       {children}

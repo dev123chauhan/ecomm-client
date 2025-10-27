@@ -19,7 +19,7 @@ import Billing from "./pages/Billing";
 import Order from "./pages/Order";
 import Review from "./pages/Review";
 import ProductDetail from "./pages/ProductDetail";
-import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import PrivateRoute from "./privateRoute/PrivateRoute";
 export default function App() {
   const dispatch = useDispatch();
   useEffect(() => {

@@ -16,7 +16,7 @@ export const CartProvider = ({ children }) => {
       {children}
 
       {/* ✅ Drawer mounted globally — always available */}
-      <Cart visible={visible} onHide={closeDrawer} />
+      <Cart visible={visible} onHide={closeDrawer} />  
     </CartContext.Provider>
   );
 };

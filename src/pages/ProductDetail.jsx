@@ -3,11 +3,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import {  Minus, Plus, Heart } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import RecommendedProducts from "../components/WishLists/RecommendedProducts";
-import { useModal } from "../context/ModalContext";
 import { addToCart } from "../redux/slice/cartSlice";
 import { toast } from "sonner";
 import { toggleWishlistItem } from "../redux/slice/wishlistSlice";
 import Button from "../common/Button";
+import { useModal } from "../context/ModalContext";
 const ProductDetail = () => {
   const location = useLocation();
   const navigate = useNavigate();

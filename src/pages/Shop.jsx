@@ -4,7 +4,6 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { addToCart } from "../redux/slice/cartSlice";
 import { fetchWishlist, toggleWishlistItem } from "../redux/slice/wishlistSlice";
-import { useModal } from "../context/ModalContext";
 import { setProducts } from "../redux/slice/shopSlice";
 import { useGetProductsQuery, useGetCategoriesQuery } from "../redux/slice/shopApiSlice";
 import useShopHandlers from "../hooks/useShopHandlers";
@@ -13,6 +12,7 @@ import NoProductFound from "../components/NoProductFound/NoProductFound";
 import ProductSkeleton from "../components/Skeleton/ProductSkeleton";
 import Breadcrumb from "../common/Breadcrumb";
 import Card from "../common/Card";
+import { useModal } from "../context/ModalContext";
 export default function Shop() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
