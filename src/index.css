@@ -41,12 +41,6 @@ footer {
 .scrollToTop {
   background-color: var(--primary-color) !important;
   border-radius: 50% !important;
-  position: fixed !important;
-  bottom: 20px !important;
-  right: 20px !important;
-  z-index: 9999 !important;
-  margin: 0 !important;
-  padding: 0 !important;
 }
 .upArrow {
   color: white !important;
@@ -123,8 +117,4 @@ body[style*="position: fixed"] {
 .dark-theme-dialog .p-dialog-content {
   background-color: #1f2937 !important;
   color: #ffffff !important;
-}
-main {
-  padding-bottom: 0 !important;
-  margin-bottom: 0 !important;
 }

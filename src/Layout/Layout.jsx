@@ -16,7 +16,7 @@ const Layout = () => {
     setIsBannerVisible(isVisible);
   };
   return (
-    <div className="">
+    <>
       <div className="fixed top-0 left-0 right-0 z-50">
         <React.Suspense fallback={<div className="h-8 secondaryColor" />}>
           <AnnouncementBanner
@@ -25,11 +25,8 @@ const Layout = () => {
         </React.Suspense>
         <Header />
       </div>
-
       <div className={`${isBannerVisible ? "pt-[50px]" : "pt-[9px]"}`}>
-        <main>
-          <Outlet />
-        </main>
+        <Outlet />
         <ScrollToTop
           className="scrollToTop"
           smooth
@@ -37,7 +34,7 @@ const Layout = () => {
         />
         <Footer />
       </div>
-    </div>
+    </>
   );
 };
 export default Layout;
