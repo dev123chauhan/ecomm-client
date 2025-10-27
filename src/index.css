@@ -1,12 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- html, body {
+body, html {
   margin: 0 !important;
   padding: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  overflow-x: hidden !important;
 }
 footer {
   margin-bottom: 0 !important;
@@ -95,6 +92,7 @@ body.p-overflow-hidden {
 body[style*="position: fixed"] {
   overflow-y: scroll !important;
 }
+
 .custom-dialog .p-dialog-header {
   justify-content: center !important;
    padding-bottom: 0rem !important;
