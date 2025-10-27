@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
+import ScrollToTop from "react-scroll-to-top";
+import { ArrowUp } from "lucide-react";
 const AnnouncementBanner = React.lazy(() => import("./AnnouncmentBanner"));
 const Layout = () => {
   const location = useLocation();
@@ -26,8 +28,13 @@ const Layout = () => {
 
       <div className={`${isBannerVisible ? "pt-[50px]" : "pt-[9px]"}`}>
         <main>
-         <Outlet />
+          <Outlet />
         </main>
+        <ScrollToTop
+          className="scrollToTop"
+          smooth
+          component={<ArrowUp size={20} className="upArrow" />}
+        />
         <Footer />
       </div>
     </div>

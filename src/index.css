@@ -1,7 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-body, html {
+body,
+html {
   margin: 0 !important;
   padding: 0 !important;
 }
@@ -40,6 +41,12 @@ footer {
 .scrollToTop {
   background-color: var(--primary-color) !important;
   border-radius: 50% !important;
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  z-index: 9999 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 .upArrow {
   color: white !important;
@@ -95,22 +102,20 @@ body[style*="position: fixed"] {
 
 .custom-dialog .p-dialog-header {
   justify-content: center !important;
-   padding-bottom: 0rem !important;
-   align-items: center;
+  padding-bottom: 0rem !important;
+  align-items: center;
 }
-.p-sidebar .p-sidebar-header{
+.p-sidebar .p-sidebar-header {
   padding: 0rem !important;
 }
 
-
-
 .light-theme-dialog .p-dialog-header {
   background-color: #ffffff !important;
-  color: #111827 !important; 
+  color: #111827 !important;
 }
 
 .dark-theme-dialog .p-dialog-header {
-  background-color: #1f2937 !important; 
+  background-color: #1f2937 !important;
   color: #ffffff !important;
   border-bottom: 1px solid #374151 !important;
 }
@@ -119,6 +124,7 @@ body[style*="position: fixed"] {
   background-color: #1f2937 !important;
   color: #ffffff !important;
 }
-
-
-
+main {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
