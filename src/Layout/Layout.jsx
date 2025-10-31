@@ -24,7 +24,7 @@ const Layout = () => {
         <Header />
       </div>
 
-      <div className={`${isBannerVisible ? "pt-[50px]" : "pt-[9px]"}`}>
+      <div className={`${isBannerVisible ? "" : ""}`}>
         <main>
          <Outlet />
         </main>

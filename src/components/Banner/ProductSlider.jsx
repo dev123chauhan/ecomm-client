@@ -124,7 +124,7 @@ const ProductSlider = () => {
         >
          
           <div className="flex flex-col md:flex-row h-full items-center gap-6 sm:gap-8 md:gap-12 lg:gap-16 mb-8 md:mb-12">
-            <div className="w-full md:w-1/2 space-y-3 sm:space-y-4 md:space-y-6 text-center md:text-left">
+            <div className="w-full md:w-1/2 space-y-3 sm:space-y-4 md:space-y-6 text-center md:text-left pt-10">
               <div className="w-10 h-10 mx-auto md:mx-0 flex items-center space-x-2">
                 <img
                   src={iphonelogo}
