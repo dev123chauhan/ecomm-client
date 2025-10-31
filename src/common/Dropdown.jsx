@@ -12,8 +12,8 @@ import userActive from "../../public/assets/userActive.png";
 import { logoutUser } from "../redux/action/authAction";
 import { fetchCart } from "../redux/slice/cartSlice";
 import { ThemeContext } from "../context/ThemeContext";
-import { dropdownItems } from "../lib/dropdownItems";
 import { useCart } from "../context/CartContext";
+import { dropdownItems } from "../lib/dropdownItems";
 const Dropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();

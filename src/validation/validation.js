@@ -4,7 +4,7 @@ export const validateUsername = (username) => {
     return { isValid: false, message: "Name must be at least 2 characters long" };
   if (username.length > 50)
     return { isValid: false, message: "Name cannot exceed 50 characters" };
-  return { isValid: true, message: "" }; 
+  return { isValid: true, message: "" };
 };
 
 export const validateEmail = (email) => {

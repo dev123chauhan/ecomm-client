@@ -5,9 +5,15 @@ import { useFormik } from "formik";
 import { toast } from "sonner";
 import { createOrder } from "../redux/slice/orderSlice";
 import { createRazorpayOrder, getRazorpayKey, verifyPayment } from "../redux/slice/paymentSlice";
+import {
+  validateEmail,
+  validateFirstName,
+  validatePhoneNumber,
+  validateStreetAddress,
+  validateTownCity,
+} from "../validation/validation";
 import BillingForm from "../components/Billing/BillingForm";
 import OrderSummary from "../components/Billing/OrderSummary";
-import { validateEmail, validateFirstName, validatePhoneNumber, validateStreetAddress, validateTownCity } from "../validation/validation";
 
 const Billing = () => {
   const dispatch = useDispatch();

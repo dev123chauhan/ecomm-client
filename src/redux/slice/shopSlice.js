@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 const initialState = {
   selectedCategories: [],
   selectedSubCategories: [],
@@ -10,7 +9,7 @@ const initialState = {
 
 export const shopSlice = createSlice({
   name: "Shop",
-  initialState,
+  initialState,       
   reducers: {
     setProducts: (state, action) => {
       state.allProducts = action.payload;

@@ -1,4 +1,6 @@
 import { Route, Routes, useLocation } from "react-router-dom";
+import ScrollToTop from "react-scroll-to-top";
+import { ArrowUp } from 'lucide-react';
 import { useDispatch } from "react-redux";
 import { checkAuthentication } from "./redux/action/authAction";
 import { useEffect } from "react";
@@ -17,7 +19,8 @@ import Billing from "./pages/Billing";
 import Order from "./pages/Order";
 import Review from "./pages/Review";
 import ProductDetail from "./pages/ProductDetail";
-import PrivateRoute from "./privateRoute/PrivateRoute";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import Account from "./pages/Account";
 export default function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -56,6 +59,11 @@ export default function App() {
   return (
     <>
       <Toaster color="green" position="bottom-right" />
+      <ScrollToTop
+        className="scrollToTop"
+        smooth
+        component={<ArrowUp size={20} className="upArrow" />}
+      />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index  element={<Home />} />
@@ -74,6 +82,7 @@ export default function App() {
           <Route path="/order" element={<PrivateRoute element={Order} />} />
           <Route path="/review" element={<PrivateRoute element={Review} />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/account" element={<Account />} />
         </Route>
       </Routes>
     </>
